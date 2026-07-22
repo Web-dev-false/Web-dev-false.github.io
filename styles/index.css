@@ -243,7 +243,7 @@ body {
     position: relative;
     z-index: 1;
     flex-shrink: 0;
-    width: clamp(160px, 38vw, 340px);
+    width: clamp(160px, 38vw, 250px);
 }
 
 .grupo img {
