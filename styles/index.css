@@ -237,6 +237,22 @@ body {
     text-align: center;
 }
 
+/* ========== Grupo ============== */
+
+.grupo {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    width: clamp(160px, 38vw, 340px);
+}
+
+.grupo img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.35));
+}
+
 /* ========== Celulares ========== */
 @media (max-width: 720px) {
     .hero {
@@ -260,7 +276,7 @@ body {
     }
 
     .hero__visual {
-        width: clamp(90px, 30vw, 140px);
+        width: clamp(30px, 30vw, 60px);
     }
 }
 
@@ -282,5 +298,11 @@ body {
 
     .schedule-strip__track {
         animation: none;
+    }
+}
+
+@media (max-width: 720px) {
+    .grupo {
+        width: clamp(120px, 40vw, 200px);
     }
 }

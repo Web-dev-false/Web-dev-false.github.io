@@ -223,6 +223,7 @@ body {
     font-size: clamp(1.7rem, 3.5vw, 2.1rem);
 }
 
+
 /* ========== Celulares ========== */
 
 @media (max-width: 480px) {
@@ -234,4 +235,6 @@ body {
         width: clamp(100px, 40vw, 150px);
     }
 }
+
+
 
