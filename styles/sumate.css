@@ -1,0 +1,237 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-ink: #1B1D3A;
+    --color-brand: #3335A8;
+    --color-teal: #2E8C7D;
+    --color-amber: #E3A73C;
+    --color-sky: rgb(105, 134, 196);
+
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "Inter", sans-serif;
+}
+
+body {
+    background-color: var(--color-sky);
+    font-family: var(--font-body);
+}
+
+/* ========== BARRA ========== */
+.top-bar {
+    background-color: rgb(51, 53, 168);
+    width: 100%;
+    padding: clamp(0.6rem, 2vw, 1.2rem) clamp(1rem, 4vw, 3rem);
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* ========== LOGO CON TRANSFORM ========== */
+.logo {
+    width: clamp(120px, 25vw, 200px);
+    height: clamp(32px, 5vw, 48px);
+    display: flex;
+    align-items: center;
+}
+
+.logo a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+/* ========== SUMATE ========== */
+.sumate-section {
+    display: flex;
+    justify-content: center;
+    padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 4vw, 3rem);
+    min-height: calc(100vh - 80px);
+    align-items: center;
+}
+
+.sumate-card {
+    width: 100%;
+    max-width: 560px;
+    background-color: #FBFAF6;
+    border-radius: 4px;
+    position: relative;
+    padding: clamp(2rem, 5vw, 3.25rem) clamp(1.75rem, 5vw, 3rem);
+    box-shadow: 0 20px 45px rgba(27, 29, 58, 0.25);
+}
+
+.sumate-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 10px;
+    background: linear-gradient(180deg, var(--color-amber), var(--color-teal));
+    border-radius: 4px 0 0 4px;
+}
+
+.sumate-eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-teal);
+    margin-bottom: 0.6rem;
+}
+
+.sumate-title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.9rem, 4vw, 2.5rem);
+    color: var(--color-ink);
+    line-height: 1.15;
+    margin-bottom: 0.6rem;
+}
+
+.sumate-subtitle {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: rgba(27, 29, 58, 0.7);
+    line-height: 1.5;
+    margin-bottom: 2rem;
+    max-width: 42ch;
+}
+
+.sumate-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+}
+
+.sumate-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.sumate-field label {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-ink);
+}
+
+.sumate-field input,
+.sumate-field textarea {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--color-ink);
+    background-color: #fff;
+    border: 1.5px solid rgba(27, 29, 58, 0.15);
+    border-radius: 6px;
+    padding: 0.75rem 0.9rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sumate-field textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.sumate-field input:focus,
+.sumate-field textarea:focus {
+    outline: none;
+    border-color: var(--color-brand);
+    box-shadow: 0 0 0 3px rgba(51, 53, 168, 0.15);
+}
+
+.sumate-field input:invalid:not(:placeholder-shown),
+.sumate-field textarea:invalid:not(:placeholder-shown) {
+    border-color: #C4453B;
+}
+
+.sumate-submit {
+    margin-top: 0.4rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #fff;
+    background-color: var(--color-brand);
+    border: none;
+    border-radius: 6px;
+    padding: 0.85rem 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.sumate-submit:hover:not(:disabled) {
+    background-color: #2a2c8d;
+}
+
+.sumate-submit:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.sumate-submit:disabled {
+    background-color: rgba(27, 29, 58, 0.3);
+    cursor: not-allowed;
+}
+
+.sumate-error-banner {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: #C4453B;
+    background-color: rgba(196, 69, 59, 0.08);
+    border: 1px solid rgba(196, 69, 59, 0.25);
+    border-radius: 6px;
+    padding: 0.7rem 0.9rem;
+}
+
+.sumate-success {
+    text-align: left;
+}
+
+.sumate-success-mark {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background-color: var(--color-teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.sumate-success-mark svg {
+    width: 22px;
+    height: 22px;
+}
+
+.sumate-success .sumate-title {
+    font-size: clamp(1.7rem, 3.5vw, 2.1rem);
+}
+
+/* ========== Celulares ========== */
+
+@media (max-width: 480px) {
+    .top-bar {
+        justify-content: center;
+    }
+
+    .logo {
+        width: clamp(100px, 40vw, 150px);
+    }
+}
+

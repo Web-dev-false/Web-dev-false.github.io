@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lectucuc | Sumate</title>
+    <link rel="shortcut icon" href="imgs/favicon.png">
+    <link rel="stylesheet" href="styles/sumate.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo">
+            <a href="https://cuc.uncuyo.edu.ar">
+                <img src="imgs/luka.png" alt="Logo">
+            </a>
+        </div>
+    </header>
+
+    <main id="app" class="sumate-section">
+        <div class="sumate-card">
+
+            <!-- Formulario -->
+            <div v-if="status !== 'success'">
+                <p class="sumate-eyebrow">Sumate</p>
+                <h1 class="sumate-title">Contanos qué te gustaría leer con nosotros</h1>
+                <p class="sumate-subtitle">Dejanos tus datos y un mensaje. Te contestamos apenas lo leemos.</p>
+
+                <form class="sumate-form" @submit.prevent="enviar">
+                    <div class="sumate-field">
+                        <label for="nombre">Nombre</label>
+                        <input
+                            type="text"
+                            id="nombre"
+                            v-model="form.nombre"
+                            placeholder="Como te llamamos"
+                            required
+                        >
+                    </div>
+
+                    <div class="sumate-field">
+                        <label for="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            v-model="form.email"
+                            placeholder="tu@correo.com"
+                            required
+                        >
+                    </div>
+
+                    <div class="sumate-field">
+                        <label for="mensaje">Mensaje</label>
+                        <textarea
+                            id="mensaje"
+                            v-model="form.mensaje"
+                            placeholder="Contanos por qué te querés sumar"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <p class="sumate-error-banner" v-if="status === 'error'">
+                        No pudimos enviar tu mensaje. Revisá tu conexión e intentá de nuevo.
+                    </p>
+
+                    <button class="sumate-submit" type="submit" :disabled="status === 'loading'">
+                        {{ status === 'loading' ? 'Enviando...' : 'Sumarme' }}
+                    </button>
+                </form>
+            </div>
+
+            <!-- Confirmación -->
+            <div class="sumate-success" v-else>
+                <div class="sumate-success-mark">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 12.5L9.5 18L20 6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <p class="sumate-eyebrow">Listo</p>
+                <h1 class="sumate-title">Ya te sumaste</h1>
+                <p class="sumate-subtitle">Gracias, {{ form.nombre }}. Recibimos tu mensaje y te vamos a escribir a {{ form.email }} pronto.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        const { createApp, reactive, ref } = Vue;
+
+        createApp({
+            setup() {
+                const form = reactive({
+                    nombre: '',
+                    email: '',
+                    mensaje: ''
+                });
+
+                const status = ref('idle'); // idle | loading | success | error
+
+                async function enviar() {
+                    status.value = 'loading';
+                    try {
+                        const response = await fetch('https://formsubmit.co/ajax/thiagochicocremaschi@gmail.com', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                Nombre: form.nombre,
+                                Email: form.email,
+                                Mensaje: form.mensaje,
+                                _subject: 'Nueva inscripción en Lectucuc | Sumate'
+                            })
+                        });
+
+                        if (!response.ok) throw new Error('Respuesta no exitosa');
+
+                        status.value = 'success';
+                    } catch (err) {
+                        status.value = 'error';
+                    }
+                }
+
+                return { form, status, enviar };
+            }
+        }).mount('#app');
+    </script>
+
+</body>
+</html>
